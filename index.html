@@ -1077,11 +1077,15 @@
             });
 
             // Hide/Show Explanation Box
-            const expBox = document.getElementById('explanation-box');
-            expBox.classList.add('hidden');
-            if (q.explanation) {
-                document.getElementById('explanation-text').innerHTML = q.explanation;
-            }
+    // Show Explanation after answering
+    const expBox = document.getElementById('explanation-box');
+
+    if (selectedOption !== undefined && q.explanation) {
+        expBox.classList.remove('hidden');
+        document.getElementById('explanation-text').innerHTML = q.explanation;
+    } else {
+        expBox.classList.add('hidden');
+    }
 
             // Button controls
             document.getElementById('btn-prev-q').disabled = activeQuestionIndex === 0;
