@@ -631,6 +631,19 @@
         
         // Built-in Exam Questions Dataset (High quality Math & Physics & CS)
         const DEFAULT_EXAMS = [
+             {
+    "id": "biology-unit-2-animals",
+    "title": exam["title"],
+    "category": exam["category"],
+    "timeLimit": exam["timeLimit"],
+    "description": "30 practice questions covering Grade 11 Biology Unit 2: Animals.",
+    "icon": "fa-dna",
+    "color": "emerald",
+    "questions": exam["questions"],
+},
+
+
+
             {
                 id: 'physics-2d-motion',
                 title: 'Unit 2: Two-Dimensional Motion',
@@ -1079,6 +1092,25 @@
             // Hide/Show Explanation Box
     // Show Explanation after answering
     const expBox = document.getElementById('explanation-box');
+          const oldFeedback = expBox.querySelector('.answer-feedback');
+    if (oldFeedback) oldFeedback.remove();
+
+    if (selectedOption !== undefined) {
+        const feedbackText = document.createElement('div');
+        feedbackText.className = 'answer-feedback font-bold text-lg mb-3';
+
+        if (selectedOption === q.correctAnswerIndex) {
+            feedbackText.innerHTML = '✓ Correct!';
+            feedbackText.classList.add('text-green-400');
+        } else {
+            feedbackText.innerHTML =
+                '✗ Incorrect! Correct answer: ' +
+                String.fromCharCode(65 + q.correctAnswerIndex);
+            feedbackText.classList.add('text-red-400');
+        }
+
+        expBox.prepend(feedbackText);
+    }      
 
     if (selectedOption !== undefined && q.explanation) {
         expBox.classList.remove('hidden');
